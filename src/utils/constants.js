@@ -1,3 +1,3 @@
-export const userUrl = 'http://localhost:5050/teaching-be/api/users/';
-export const productsUrl = 'http://localhost:5050/teaching-be/api/products/';
-export const ordersUrl = 'http://localhost:5050/teaching-be/api/orers/';
+export const userUrl = 'http://69happyfamily.netlify.app/teaching-be/api/users/';
+export const productsUrl = 'http://69happyfamily.netlify.app/teaching-be/api/products/';
+export const ordersUrl = 'http://69happyfamily.netlify.app/teaching-be/api/orers/';
