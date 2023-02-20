@@ -1,0 +1,10 @@
+.header-parent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

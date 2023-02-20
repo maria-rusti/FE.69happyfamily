@@ -1,0 +1,18 @@
+.footer-parent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-evenly;
+    width: 20%;
+}
+
+.tosandpos {
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}

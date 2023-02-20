@@ -1,0 +1,45 @@
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.card-product {
+    width: 250px;
+    height: 320px;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.my-3 {
+    margin: 18px 0
+}
