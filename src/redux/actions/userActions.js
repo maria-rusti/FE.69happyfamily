@@ -16,7 +16,7 @@ export const loginUser = (userName, password) => {
   return (dispatch) => {
     dispatch(loginUserRequest());
     axios
-      .post(`${userUrl}users/login`, {
+      .post(`${userUrl}/login`, {
         userName: userName,
         password: password
       })
@@ -43,7 +43,7 @@ export const registerUser = (userName, password, age) => {
   return (dispatch) => {
     dispatch(registerUserRequest());
     axios
-      .post(`${userUrl}users/register`, {
+      .post(`${userUrl}/register`, {
         userName: userName,
         password: password,
         age: Number(age)
