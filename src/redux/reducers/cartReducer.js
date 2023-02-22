@@ -5,7 +5,10 @@ import {
   ADD_PRODUCT_FAILURE,
   REMOVE_PRODUCT_REQUEST,
   REMOVE_PRODUCT_SUCCESS,
-  REMOVE_PRODUCT_FAILURE
+  REMOVE_PRODUCT_FAILURE,
+  UPDATE_PRODUCT_FAILURE,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS
 } from '../types/cartTypes';
 
 const initialState = {
@@ -50,14 +53,14 @@ export const cartReducer = (state = initialState, action) => {
         loading: true
       };
     case ADD_PRODUCT_SUCCESS:
-      const updatedProducts =
+      const updatedProductsPlus =
         action?.payload === state.cartProducts
           ? state.cartProducts
           : [...handleCartProduct(action.payload, state.cartProducts, 'plus')];
       return {
         ...state,
         loading: false,
-        cartProducts: [...updatedProducts],
+        cartProducts: [...updatedProductsPlus],
         hasErrors: {
           message: '',
           error: false
@@ -78,19 +81,47 @@ export const cartReducer = (state = initialState, action) => {
         loading: true
       };
     case REMOVE_PRODUCT_SUCCESS:
-      const data = handleCartProduct(action.payload, state.cartProducts, 'minus');
-      const updatedProductsRemove =
-        action?.payload === state.cartProducts ? state.cartProducts : [...data];
       return {
         ...state,
         loading: false,
-        cartProducts: [...updatedProductsRemove],
+        cartProducts:
+          action?.payload === state?.cartProducts
+            ? state?.cartProducts
+            : state?.cartProducts.filter((item) => item !== action?.payload),
         hasErrors: {
           message: '',
           error: false
         }
       };
     case REMOVE_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        hasErrors: {
+          message: action?.payload?.message,
+          error: true
+        }
+      };
+    case UPDATE_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case UPDATE_PRODUCT_SUCCESS:
+      const updatedProductsMinus =
+        action?.payload === state.cartProducts
+          ? state.cartProducts
+          : [...handleCartProduct(action.payload, state.cartProducts, 'minus')];
+      return {
+        ...state,
+        loading: false,
+        cartProducts: [...updatedProductsMinus],
+        hasErrors: {
+          message: '',
+          error: false
+        }
+      };
+    case UPDATE_PRODUCT_FAILURE:
       return {
         ...state,
         loading: false,

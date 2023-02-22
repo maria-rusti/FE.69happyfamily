@@ -4,7 +4,10 @@ import {
   addProductFailure,
   removeProductRequest,
   removeProductSuccess,
-  removeProductFailure
+  removeProductFailure,
+  updateProductSuccess,
+  updateProductRequest,
+  updateProductFailure
 } from '../types/cartTypes';
 
 export const addProduct = (product) => {
@@ -25,6 +28,16 @@ export const removeProduct = (product) => {
       dispatch(removeProductSuccess(product));
     } catch (error) {
       dispatch(removeProductFailure(error));
+    }
+  };
+};
+export const updatedProduct = (product) => {
+  return (dispatch) => {
+    dispatch(updateProductRequest());
+    try {
+      dispatch(updateProductSuccess(product));
+    } catch (error) {
+      dispatch(updateProductFailure(error));
     }
   };
 };

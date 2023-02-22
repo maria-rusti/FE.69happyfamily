@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { addProduct, removeProduct } from '../../redux/actions/cartActions';
+import { addProduct, removeProduct, updatedProduct } from '../../redux/actions/cartActions';
 
 export default function MediaControlCard({ product }) {
   // const [quantity, setQuantity] = React.useState(0);
@@ -22,7 +22,7 @@ export default function MediaControlCard({ product }) {
 
   const handleDecrease = (event, product) => {
     event.preventDefault();
-    dispatch(removeProduct(product));
+    dispatch(updatedProduct(product));
   };
   const theme = useTheme();
   const dispatch = useDispatch();

@@ -9,6 +9,7 @@ import { registerUser } from '../../redux/actions/userActions';
 export default function Register() {
   const [userName, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [age, setAge] = React.useState('');
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state?.userState?.isLoggedIn);
@@ -42,10 +43,22 @@ export default function Register() {
         }}
         onChange={(e) => setPassword(e?.target?.value)}
       />
+      <TextField
+        value={age}
+        id="outlined-age-input"
+        label="Age"
+        type="number"
+        autoComplete="current-age"
+        placeholder="age"
+        sx={{
+          margin: '10px 0'
+        }}
+        onChange={(e) => setAge(e?.target?.value)}
+      />
       <Button
         variant="outlined"
         className="my-3"
-        onClick={() => dispatch(registerUser(userName, password))}>
+        onClick={() => dispatch(registerUser(userName, password, age))}>
         Register
       </Button>
       <p className="my-3">Already have an account??</p>
