@@ -6,17 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductOrder from '../../components/ProductOder/ProductOrder';
 
 const Order = () => {
-  // const [products, setProducts] = useState([]);
+  
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state?.cartState?.cartProducts);
 
   useEffect(() => {
-    // const getData = async () => {
-    //   const data = await getAllProducts();
-    //   setProducts(data);
-    //   console.log('data: ', data);
-    // };
-    // getData();
     dispatch(getAllProducts());
   }, []);
 
