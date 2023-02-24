@@ -34,9 +34,6 @@ const handleCartProduct = (product, cartProducts, type) => {
       }
     }
   });
-  // if (item.quantity === 0 ) {
-  //   removeProduct(product);
-  //  }
 
   if (productExists === false) {
     cartState.push({ ...product, quantity: 1 });

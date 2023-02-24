@@ -3,17 +3,18 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Container, Button } from '@mui/material';
+import { Container, Button, MenuList } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './Header.css';
 import { useEffect } from 'react';
 import { addProduct } from '../../redux/actions/cartActions';
 import ProductCard from '../ProductCard/ProductCard';
 import { logoutUser } from '../../redux/actions/userActions';
+import { calculateTotalPrice } from '../../utils/functions';
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,6 +22,7 @@ function Header() {
   const isLoggedIn = useSelector((state) => state?.userState?.isLoggedIn);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -36,6 +38,8 @@ function Header() {
     dispatch(logoutUser());
   };
 
+  const totalPrice = calculateTotalPrice(cartProducts);
+
   return (
     <Container>
       <Box
@@ -44,42 +48,38 @@ function Header() {
         {/* Links to pages */}
         <div className="header-links">
           <Link to={'/'}>
-            <Typography sx={{ minWidth: 100 }}>Home</Typography>
+            <Typography sx={{ minWidth: 100 }} component="h2">
+              Home
+            </Typography>
           </Link>
-          {!isLoggedIn ? (
-            <>
-              <Link to={'/login'}>
-                <Typography sx={{ minWidth: 100 }}>Log in</Typography>
-              </Link>
-              <Link to={'/register'}>
-                <Typography sx={{ minWidth: 100 }}>Register</Typography>
-              </Link>{' '}
-            </>
-          ) : (
-            <Link to={'/login'}>
-              <Button size="small" onClick={() => logOutTheUser()}>
-                <Typography sx={{ minWidth: 100 }}>Log out</Typography>
-              </Button>
-            </Link>
-          )}
+          <Link to={'/checkout'}>
+            <Typography sx={{ minWidth: 100 }} component="h2">
+              Checkout
+            </Typography>
+          </Link>
+          <Link to={'/login'}>
+            <Button onClick={() => logOutTheUser()} sx={{ textTransform: 'none' }}>
+              <Typography sx={{ minWidth: 100 }} component="h2">
+                Log out
+              </Typography>
+            </Button>
+          </Link>
         </div>
         {/* Links to pages */}
 
-        {isLoggedIn ? (
-          <div className="profile">
-            <Tooltip title="Account settings">
-              <IconButton
-                onClick={handleClick}
-                size="small"
-                sx={{ ml: 2 }}
-                aria-controls={open ? 'account-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}>
-                <Avatar sx={{ width: 100, height: 32 }}>Cart</Avatar>
-              </IconButton>
-            </Tooltip>
-          </div>
-        ) : null}
+        <div>
+          <Tooltip title="Cart">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              sx={{ ml: 2 }}
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}>
+              <Avatar sx={{ width: 100, height: 32 }}>Cart</Avatar>
+            </IconButton>
+          </Tooltip>
+        </div>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -114,16 +114,27 @@ function Header() {
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-        {cartProducts.map((product, index) => {
-          return (
-            <MenuItem key={`${index}statae`}>
-              <ProductCard product={product} key={`${index}`} type={'Cart'} />
+        {cartProducts.length === 0 ? (
+          <MenuItem>
+            <p>It appears that you don't have anything in the cart</p>
+          </MenuItem>
+        ) : (
+          <MenuList>
+            {cartProducts.map((product, index) => {
+              return (
+                <MenuItem key={`${index}statae`}>
+                  <ProductCard product={product} key={`${index}`} type={'Cart'} />
+                </MenuItem>
+              );
+            })}
+            <MenuItem>
+              <p> {`Total price: ${totalPrice} RON`}</p>
             </MenuItem>
-          );
-        })}
-        <Link to={'/order'}>
-          <Button>Go to checkout!</Button>
-        </Link>
+            <Link to={'/checkout'}>
+              <Button>Go to checkout!</Button>
+            </Link>
+          </MenuList>
+        )}
       </Menu>
       {/* A profile button template */}
     </Container>

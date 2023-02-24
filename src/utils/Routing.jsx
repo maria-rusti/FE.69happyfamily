@@ -42,7 +42,7 @@ const Routing = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
         <Route
-          path="/order"
+          path="/checkout"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Order />

@@ -10,10 +10,10 @@ const Footer = () => {
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }} className='footer-parent'>
         <div className='footer-links'>
-          <Link to={'https://github.com/raul-tiron'} target={'_blank'} rel={'noreferrer'}>
+          <Link to={'https://github.com/Sebi-Buta'} target={'_blank'} rel={'noreferrer'}>
             <Typography sx={{ minWidth: 100 }}>GitHub</Typography>
           </Link>
-          <Link to={'https://instagram.com/trnraul'} target={'_blank'} rel={'noreferrer'}>
+          <Link to={'https://www.instagram.com/sebastian_buta_07/'} target={'_blank'} rel={'noreferrer'}>
             <Typography sx={{ minWidth: 100 }}>Instagram</Typography>
           </Link>
         </div>

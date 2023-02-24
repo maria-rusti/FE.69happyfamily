@@ -51,28 +51,39 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import { removeProduct } from '../../redux/actions/cartActions';
 
-export default function ProductOrder({ product, type }) {
+export default function ProductOrder({ product }) {
   const dispatch = useDispatch();
   const theme = useTheme();
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', height: 450, width: 1000 }}>
+    <Card
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: 450,
+        width: 1000,
+        flexWrap: 'wrap',
+        margin: 2
+      }}>
       <CardMedia
         component="img"
-        sx={{ width: 300, height: 300 }}
+        sx={{ width: 400, height: 400 }}
         image={product?.image}
         alt="Live from space album cover"
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-start', width: 500, height: 400 }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {product?.title}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {product?.description}
+            {`Description: ${product?.description}`}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {product?.price}
+            {`Price: ${product?.price}`}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary" component="div">
+            {`Quantity: ${product?.quantity}`}
           </Typography>
         </CardContent>
       </Box>
