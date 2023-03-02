@@ -10,10 +10,15 @@ import { Button } from '@mui/material';
 import { addProduct, removeProduct, updatedProduct } from '../../redux/actions/cartActions';
 
 export default function MediaControlCard({ product }) {
-  // const [quantity, setQuantity] = React.useState(0);
+  
   const cartProducts = useSelector((state) => state?.cartState?.cartProducts);
   const [index, setIndex] = React.useState(0);
   const quantity = useSelector((state) => state?.cartState?.cartProducts[index]?.quantity);
+  const theme = useTheme();
+  const dispatch = useDispatch();
+
+  const stergere = (event) =>
+    quantity > 1 ? handleDecrease(event, product) : dispatch(removeProduct(product));
 
   const handleIncrease = (event, product) => {
     event.preventDefault();
@@ -24,8 +29,6 @@ export default function MediaControlCard({ product }) {
     event.preventDefault();
     dispatch(updatedProduct(product));
   };
-  const theme = useTheme();
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     cartProducts?.filter((item, idx) => {
@@ -64,7 +67,7 @@ export default function MediaControlCard({ product }) {
         }}>
         <Button onClick={(event) => handleIncrease(event, product)}>+</Button>
         <Typography>{quantity}</Typography>
-        <Button onClick={(event) => handleDecrease(event, product)}>-</Button>
+        <Button onClick={(event) => stergere(event)}>-</Button>
       </Box>
       <Box
         sx={{

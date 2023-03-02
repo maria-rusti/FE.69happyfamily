@@ -8,7 +8,7 @@ import { getOrderProducts, orderProducts } from '../../redux/actions/orderAction
 import ProductOrderHistory from '../../components/ProductOrderHistory/ProductOrderHistory';
 
 const Order = () => {
-  // const [products, setProducts] = useState([]);
+  
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state?.cartState?.cartProducts);
   const userName = useSelector((state) => state?.userState?.userName);

@@ -29,7 +29,11 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log('statae from header: ', cartProducts);
+  const [disabled, setDisabled] = React.useState(true);
+
+  const setareButon = (cartProducts) =>
+    cartProducts.length === 0 ? setDisabled(false) : setDisabled(true);
+
   useEffect(() => {
     dispatch(addProduct(cartProducts));
   }, []);
@@ -130,13 +134,14 @@ function Header() {
             <MenuItem>
               <p> {`Total price: ${totalPrice} RON`}</p>
             </MenuItem>
-            <Link to={'/checkout'}>
-              <Button>Go to checkout!</Button>
-            </Link>
-          </MenuList>
-        )}
+          );
+        }
+        {cartProducts.length > 0 ? (
+          <Link to={'/order'}>
+            <Button>Go to checkout!</Button>
+          </Link>
+        ) : null}
       </Menu>
-      {/* A profile button template */}
     </Container>
   );
 }
